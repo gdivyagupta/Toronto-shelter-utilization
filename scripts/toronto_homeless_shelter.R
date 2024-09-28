@@ -11,7 +11,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 
-file_path <- "data/raw_data/raw_data.csv"
+file_path <- "data/Daily shelter overnight occupancy.csv"
 df <- read_csv(file_path)
 head(df)
 
