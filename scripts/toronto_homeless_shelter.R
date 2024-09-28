@@ -1,3 +1,4 @@
+Dataset: https://open.toronto.ca/dataset/daily-shelter-overnight-service-occupancy-capacity/
 # Initialization
 
 install.packages("gt")
@@ -10,7 +11,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 
-file_path <- "~/Downloads/Daily shelter overnight occupancy.csv"
+file_path <- "data/raw_data/raw_data.csv"
 df <- read_csv(file_path)
 head(df)
 
