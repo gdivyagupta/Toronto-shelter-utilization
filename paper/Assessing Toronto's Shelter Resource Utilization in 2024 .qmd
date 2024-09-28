@@ -1,0 +1,181 @@
+---
+title: "Assessing Toronto's Shelter Resource Utilization"
+author: "Divya Gupta"
+abstract: 
+date: today
+date-format: long
+number-sections: true
+format: pdf
+toc: true
+editor: visual
+thanks: "Code and data supporting this analysis is available at: https://github.com/gdivyagupta/Toronto-shelter-utilization"
+bibliography: references.bib
+---
+
+**Assessing Toronto's Shelter Resource Utilization in 2024**
+
+Divya Gupta
+
+September 27, 2024
+
+This paper analyzes the occupancy rates of Toronto’s shelter system to shed light on the type of and level of use, distinguished by room and bed-based occupancy levels. It analyzes the available data according to room and bed based occupancy, occupancy levels at different times of year, and overall, shelter-by-shelter occupancy to provide a holistic overview of current resource utilization patterns at the shelters. This provides valuable insight into the system and allows decisions to be made regarding funding reallocation and increasing further support for shelters in Toronto.
+
+**Table of contents**
+
+1 Introduction…………………………………………………………………………………..... 2
+
+2 Data…………………………………………………………………………………………….. 3
+
+3 Discussion…………………………………………………………………………………….... 6
+
+4 References…………………………………………………………………………….………... 7
+
+5 Appendix……………………………………………………………………………...………... 8
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+# **Introduction**
+
+\
+
+The homelessness crisis in Toronto is a growing challenge that needs adequate allocation and utilization of resources to be managed. As homelessness rates rise, government and non-for-profit shelters hold responsibility for efficiently and optimally organizing resources in order to assist the most people in need. The efficacy of overnight stay shelters is often scrutinized due to lack of access, long wait times, and lack of information causing discrepancies between availability and need of beds and rooms in these shelters. A better understanding of shelter resource allocation and utilization in Toronto is needed to identify - by neighborhood and by time periods - utilization gaps to ensure that all individuals can be comfortably accommodated. 
+
+\
+
+This paper utilizes the dataset entitled, “Daily Shelter & Overnight Service Occupancy & Capacity” from Open Data Toronto (pulled from Toronto Shelter and Support Services division's Shelter Management Information System (SMIS) database). This dataset provides insights into how room-based (private sleeping arrangements) and bed-based (communal sleeping arrangements) shelters are utilized in the city - including whether they are being maximised, number of beds/rooms available overall, and how many are utilized daily. This allows us to draw conclusions about the true funding capacity of these shelters and their actual capacities (depending on underutilization). This insight is key to this paper’s aim: to analyze and understand the gaps in how shelters use their funding and which areas need further support. For example, if certain shelters are often at maximum capacity, this may indicate the need for additional funding in certain neighborhoods. 
+
+\
+
+Underutilization of resources and funding may occur as a result of additional allocation towards maintenance or emergency funds. By examining the trends in daily occupancies of shelters and even comparing room-based and bed-based occupancy levels, this paper aims to understand the level of underutilization and potentially needful areas that may require additional funding to expand their capacities. This analysis directly impacts people experiencing homelessness in Toronto, as it allows the government, policymakers, and funding shareholders to re-assess how to better allocate resources and cover the inefficiencies of the current shelter distribution system. 
+
+\
+
+In this paper, I discuss the context and the structure of the dataset, followed by preliminary data cleaning to make it ready for analysis and experimentation. Further, I present a detailed summary statistics table for the cleaned data to understand key variables, present various visualizations that help the reader understand the occupation trends by shelter and by room-based or bed-based arrangements. These various demonstrations of data allow us to map out potential operational inefficiencies and mark areas for improvement. 
+
+# **Data**
+
+This study utilizes the dataset entitled “Daily Shelter & Overnight Service Occupancy & Capacity” made available by Toronto's Shelter and Support Services division on Open Data Toronto. This dataset tracks the daily use of homeless shelters around Toronto for overnight service occupancy from January to September 2024. This granular level of data allows one to closely track the daily occurrences of homeless shelters in Toronto and map utilization patterns to understand problem areas (such as months of high demand or areas with higher demand than others). 
+
+\
+
+The dataset includes 32 columns, including important information such as the name and location of the shelter program, occupancy levels as well as number of available beds (OCCUPIED_BEDS and UNOCCUPIED_BEDS, OCCUPIED_ROOMS and UNOCCUPIED_ROOMS), bed- and room-based availability, and also allows one to measure the number of beds or rooms funded for by the city (CAPACITY_FUNDING_ROOM) and the actual number (CAPACITY_ACTUAL_ROOM) available for use daily. This discrepancy is of exceptional note as it allows one to review the reasons for under availability of resources despite available funding. 
+
+\
+
+An example of other datasets that were considered is the “Toronto Shelter System Flow” dataset that tracks people experiencing homelessness and their experience with the shelter system as a whole by keeping track of the rate of return to shelters, the increasing number of newly identified homeless people, and rate of people moving to permanent housing. While this dataset is considered an asset in understanding the current state of affairs in the Toronto homelessness crisis, it provides a higher-level understanding of the overall, city-wide initiative by capturing monthly transitions in return rates and permanent housing rates. Our chosen dataset allowed specific insight into the daily workings of shelters, allowing ground-level decisions to be made by observing daily occurrences at each location.
+
+\
+
+The data was cleaned to handle missing values in important fields such as OCCUPIED_BEDS and UNOCCUPIED_BEDS. These missing values were replaced by zeros. It is assumed that these values were missing due to clerical errors or if the shelters were closed on certain days due to holidays, maintenance needs, or other closures. Records that did not include required information such as location or shelter name were removed from the analysis. 
+
+## **Measurement** 
+
+I also constructed two variables, bed_occupancy_rate (which is equal to the number of occupied beds divided by the total number of available beds in a shelter on a daily basis) and room_occupancy_rate (which is equal to the number of occupied rooms divided by the total number of available rooms in a shelter on a daily basis). These variables helped clearly understand shelter utilization levels and resource allocation efficiency since high occupancy rates indicate that shelters are operating at near full capacity, reflecting an apt utilization of resources. On the other hand, lower occupancy rates invite discussion regarding potential operational challenges or lack of awareness about certain programs that may lead to an underutilization of resources. 
+
+\
+
+This data has been visualized as below for further data analysis. 
+
+\
+
+Figure 1: Daily Occupancy of Beds & Rooms Over Time 
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd_xf8pVLy4e63ryqt8uDa0HhKeAT9Fe83hWsneZpGy4jn8OyJgeaLqjz1GCAVX7eraT5gNTqrtU4OMSjcSBhW1iOzdqNTriCK8o6E6ETgh3tzHp48qERfDYyRjwKPZKbA2G7rAp4Obwcez_OSlioOUHOI?key=kMNEAPIThruYl9-CAUp9bQ)
+
+This figure illustrates the daily usage of aggregate shelter resources throughout the year. It is seen that more beds (communal sleeping arrangements) are being used than rooms (private sleeping arrangements), likely due to a lower demand for family housing in shelters. There is a steady demand for both throughout the year, with a slightly increased skewness at the beginning of the year (from January-March), indicating an increased demand for shelters during the winter months. 
+
+\
+
+Figure 2: Distribution of Room Occupancy Rates across Shelter Programs 
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcypxijRH-gGx6iplxmAshrWl62KisNfbQcczjuQjk5wN_SuvF8NDWdMTknp96nUUne934cjuX_Qb1_n8989ihu_uTZ9ZjcPpAUKJ_xWVGBLUncGhEbIpKslWdmdKgnW3O6fZdpfWJZWfbneuOybpJw8m6u?key=kMNEAPIThruYl9-CAUp9bQ)
+
+\
+
+This figure presents a box plot illustrating the level of room occupancy by shelter, allowing insight into how individual programs are using their available resources as well as which potential neighborhoods require further funding and support due to increased demand. Most shelters have high occupancy rates, indicating a complete or near-complete usage of their available programming. For example, shelters such as Fred Victor, Dixon Hall, and Fred Victor Women’s Hostel show compact box plots with high occupancies, displaying consistent and near-complete funding and resource utilization. However, shelters like Red Door Family Shelter and YWCA Davenport have a wider spread, displaying a fluctuation in room utilization. It would be extremely insightful to conduct further analysis into these shelters to understand the reasoning behind varied resource utilization and thus reallocate funds as needed. 
+
+\
+
+Figure 3: Summary Statistics of Shelter Groups with the Room & Bed Occupancy Rates
+
+\
+
+The complete summary statistics table is included in Appendix A. This table provides an overview of the average bed and room occupancy rates shelter-by-shelter. Most bed-based shelters have full or near-full utilization, indicating a complete use of resources. Room-based shelters have greater variability in occupancy, for example, shelters such as Women’s Residence and SSHA Etobicoke Hotel Program show near-full utilization whereas Downsview Dells has an average occupancy rate below 90%. Measures need to be taken to increase these to near complete occupancy levels to best utilize allocated resources. This variability also suggests a potential lack of demand for room-based shelters or greater operational challenges that prevent them from a complete utilization of funds towards providing shelter. It is important to note that there are NaN values in the table which indicate unavailable data. This is due to the fact that certain shelters are solely room-based or bed-based, leading to an NaN value when it comes to the other. 
+
+# **Discussion**
+
+The visualizations reveal multiple aspects about the data. Firstly, there is a consistently high demand for shelters across Toronto across the year, with a slight uptick during the winter months due to seasonal changes. This invites policymakers to discussion regarding increasing funding for shelters during periods of high demands. Further, bed-based shelters operate at full or near full capacity while room-based shelters (for families, crucial for familial privacy) have a slight trend towards underutilization. Further work needs to be done to understand why these shelters are being underutilized in order to 1) increase access or 2) reallocate funding towards bed-based shelters. While most shelters operate at near-full capacity, there are certain outliers, which allow the city to individually investigate shelter-specific problems. 
+
+\
+
+Overall, this study provides a preliminary understanding of the current state of affairs in the Toronto Shelter system, specifically by drawing necessary distinctions between bed-based and room-based shelters. These findings lay the groundwork for individual investigations into shelters that require further support with funding allocation or operational challenges and overall allows further discussions to be had regarding funding. 
+
+\
+\
+\
+\
+
+# **References**
+
+\
+
+Toronto Shelter & Support Services. (2024). Daily Shelter & Overnight Service Occupancy & Capacity. Toronto. Retrieved 2024. 
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+**Appendix A: Summary Statistics Table**
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdE856nYnznhtvGrEch3wEM5gQO0prVWsWzvck38tUbcm3idE0K0Fd6fv5YS1LhdxXWchQSs11MWrayad0T7Oc_SPp7v_QZC_JpXNLEQCTgsHusoICvay3tazuRIWGQj1gm58VwkEcXmFV3oqovOij4Y_w?key=kMNEAPIThruYl9-CAUp9bQ)
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcqG5UGOHLi7gDdIdmv-EdBkEJKHbqn6avL33U1Acobfz_I7AhRUx1MEXFFVwz3RN-Q6IxsqmoFVIHs1ad_37NUjmoiprjvQknp6ok6YJmo2QwVGBI5Jesx-zhw-JQvyVKIiNOjCUtf-Dmup6jleuhEdCs?key=kMNEAPIThruYl9-CAUp9bQ)
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdl9b4zfXDfVP2MBiOja3hoUdQULxHHskU_hr9JYPgbEILw2TiEXt7TQ7HuB5uP67Wq9S8EaFRUND-Bf9uifFInxuoRNUd_jf9fQ3yFj6IFh3cMp4TH8VkLC--E520VFD3i1Gcw0SE09IXBTzCP0LHvIFZG?key=kMNEAPIThruYl9-CAUp9bQ)
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXc6lvS-6PpJuiAavGw2DCKaU-3fPCcjZ8Bn1wwIzxm55ZZIlthZO0n10ExgTJC77cA_N44a0f7xdV8q0UihgHh4uHmQRW40un9MDrGalFU4SKXiDorsqEE29O0mCS1JupZ_Fe2EbcL93C6RLSmkCzeDoR6t?key=kMNEAPIThruYl9-CAUp9bQ)
+
+\
